@@ -1,0 +1,28 @@
+     SINGLE ELEMENT IN A SORTED ARRAY 
+     
+     
+     EASY SOLUTION
+     USING HASH MAP
+     
+   public:
+   int singleNonDuplicate(vector<int>& nums) {
+        
+
+int n = nums.size();
+
+map<int,int>mam;
+
+for(int i = 0; i < n; i++){
+    mam[nums[i]]++;
+}
+
+for(auto it : mam){
+    if(it.second == 1) {
+        return it.first;
+    }
+   
+}
+  return -1;
+
+    }
+};
