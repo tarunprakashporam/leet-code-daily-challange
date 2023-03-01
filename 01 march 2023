@@ -1,0 +1,75 @@
+//leet code daily challange
+//solution using merge sort
+
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void merging(vector<int>& nums, int low, int high, int mid) {
+    vector<int> temp;
+    int left = low;
+    int right = mid + 1;
+    while (left <= mid && right <= high) {
+        if (nums[left] < nums[right]) {
+            temp.push_back(nums[left]);
+            left++;
+        }
+        else {
+            temp.push_back(nums[right]);
+            right++;
+        }
+    }
+    while (left <= mid) {
+        temp.push_back(nums[left]);
+        left++;
+    }
+    while (right <= high) {
+        temp.push_back(nums[right]);
+        right++;
+    }
+    for (int i = 0; i < temp.size(); i++) {
+        nums[low + i] = temp[i];
+    }
+}
+
+void mergesort(vector<int>& nums, int low, int high) {
+    if (low < high) {
+        int mid = (low + high) / 2;
+        mergesort(nums, low, mid);
+        mergesort(nums, mid + 1, high);
+        merging(nums, low, high, mid);
+    }
+}
+
+vector<int> sortArray(vector<int>& nums) {
+    // merge sort 
+    int n = nums.size();
+    mergesort(nums, 0, n - 1);
+    return nums;
+}
+
+int main() {
+
+
+int t; cin>>t;
+while(t--){
+int a;cin>>a;
+ vector<int>nums(a);
+for (int i = 0; i < a; ++i)
+{
+cin>>nums[i];
+}
+
+    vector<int> sorted_arr = sortArray(nums);
+    for (int x : sorted_arr) {
+        cout << x << " ";
+    }
+    cout << endl;
+ }
+   return 0;
+
+}
+
+
