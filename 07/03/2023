@@ -1,0 +1,38 @@
+
+Minimum Time to Complete Trips
+
+
+class Solution {
+
+private:
+ long long tripstaken(vector<int>&time,long long mid){
+     long long count = 0; 
+     long long n = time.size();
+for(int i =0 ;i<n;i++)
+{
+  count += mid/time[i];
+ 
+} 
+return count ; }
+
+
+
+public:
+    long long minimumTime(vector<int>& time, int totalTrips) {
+ long long low = 0;
+ long long high = 1e14;
+ long long ans = high ;
+ while(low <= high ){
+     long long mid = (low + high)>>1;
+     if(tripstaken(time,mid) >= totalTrips){
+        ans = mid;
+         high = mid-1;
+        
+     }
+     else{
+         low = mid+1;
+     }
+ }
+return ans;
+    }
+};
